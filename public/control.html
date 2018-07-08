@@ -3,18 +3,29 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Control panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <script src="control.js" defer></script>
 </head>
 
-<body>
+<body class="vertical center">
   <div class="vertical center">
     <h1>Панель управления</h1>
     <button id="start">Запустить</button>
   </div>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Иконка</th>
+        <th>Наименование</th>
+        <th>Активно</th>
+      </tr>
+    </thead>
+    <tbody id="table">
+      
+    </tbody>
+  </table>
 
 </body>
 

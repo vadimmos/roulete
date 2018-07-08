@@ -24,13 +24,14 @@ ws.onmessage = (m) => {
     });
   }
   if (m.data.includes('weapons')) {
-    weapons = JSON.parse(m.data.split('=')[1]);
+    weapons = JSON.parse(m.data.split('=')[1]).filter(w => w.enable);
     calcIconCount();
     fillRoulette(weapons);
   }
 }
 
 function roling(elem, opts) {
+  if (!(weapons instanceof Array) || weapons.length === 0) return;
   const toTransform = `translateX(-${(weapons.length + Number(opts.index)) * ICON_WIDTH - 2 * ICON_WIDTH}px)`;
   result.innerText = '';
   wrapper.hidden = false;
@@ -52,8 +53,6 @@ function roling(elem, opts) {
     result.innerText = weapons[Number(opts.index)].name;
     setTimeout(() => {
       wrapper.hidden = true;
-    }, 30000);
-    setTimeout(() => {
       isAnimate = false;
     }, 5000);
   };
@@ -78,14 +77,20 @@ function createIcon(weapon) {
   return container;
 }
 function fillRoulette(weapons = []) {
-  while (roulette.children.length < iconCount) {
+  [...roulette.children].forEach(e => e.remove());
+  const count = weapons.filter(w => w.enable).length;
+  while (count && roulette.children.length < iconCount) {
     weapons.forEach((w) => {
-      roulette.appendChild(createIcon(w));
+      if (w.enable) roulette.appendChild(createIcon(w));
     })
   }
   frame.style.maxWidth = `${ICON_WIDTH * 5}px`;
 }
 
 function calcIconCount(weaponCount = weapons.length) {
-  iconCount = weaponCount * 4;
+  if (weaponCount < 10) {
+    iconCount = 30;
+    return;
+  }
+  iconCount = weaponCount * 3;
 }

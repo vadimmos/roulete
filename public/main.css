@@ -51,6 +51,7 @@ body {
 
 #roulette {
   display: flex;
+  min-width: 1px;
 }
 
 #box {

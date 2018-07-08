@@ -7,11 +7,12 @@ exports.default = function (port = 3000) {
 
   getWeapons((err, files) => {
     if (err) console.error(err);
-    else if(files) {
+    else if (files) {
       weapons = files.map(fileNmae => {
         return {
           icon: `${fileNmae}`,
-          name: fileNmae.replace(/\.png/, '')
+          name: fileNmae.replace(/\.png/, ''),
+          enable: false
         }
       });
     }
@@ -19,12 +20,23 @@ exports.default = function (port = 3000) {
 
   server.on('connection', ws => {
     ws.on('message', message => {
-      const index = random(0, weapons.length - 1);
+      const enableWeapons = weapons.filter(w => w.enable);
+      const index = Math.floor(random(0, enableWeapons.length - 1));
       server.clients.forEach(c => {
         if (c.readyState === WebSocket.OPEN) {
-          if (message.includes('roling')) {
+          if (message.startsWith('roling')) {
             c.send(`weapons=${JSON.stringify(weapons)}`);
             c.send(`${message},${index}`);
+          } else if (message.startsWith('cahngeWeapon')) {
+            const cahngeWeapon = JSON.parse(message.split('=')[1]);
+            const cw = weapons.find(w => {
+              if (w.name === cahngeWeapon.name) {
+                w.enable = cahngeWeapon.enable;
+                return true;
+              }
+              return false;
+            });
+            if (cw) c.send(`weapons=${JSON.stringify(weapons)}`);
           }
         }
       });
