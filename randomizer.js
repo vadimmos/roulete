@@ -11,4 +11,3 @@ module.exports.default = function (min, max = 0){
   for(result = NaN; isNaN(result) || result < min || result > max; result = Math.floor(Math.random() * (max + 1))){};
   return result;
 }
-//изменил
