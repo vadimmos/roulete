@@ -1,0 +1,86 @@
+body {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.horizontal {
+  display: flex;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+#wrapper[hidden]{
+  display: none;
+}
+
+#frame {
+  border: 1px solid black;
+  overflow: hidden;
+  display: flex;
+}
+
+#roulette {
+  display: flex;
+}
+
+#box {
+  border: 5px solid red;
+  position: absolute;
+  top: 4px;
+  width: 130px;
+  height: 130px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+#result {
+  color: red;
+  font-size: 24px;
+  padding-top: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  flex: 1 0 100px;
+  background-position: center;
+  background-size: contain;
+}
+
+.title {
+  height: 30px;
+}
+
+#start {
+  background-color: brown;
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25), 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#start:active {
+  background-color: red;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+#start:focus {
+  outline: none;
+}
