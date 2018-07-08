@@ -2,25 +2,20 @@ exports.default = function (port = 3000) {
   const WebSocket = require('ws');
   const fs = require('fs');
   const random = require('./randomizer').default;
-  const server = new WebSocket.Server({port: port});
-  const weapons = [
-    {
-      name: 'weapon1',
-      icon: 'cube.png'
-    },
-    {
-      name: 'weapon2',
-      icon: 'sphere.png'
-    },
-    {
-      name: 'weapon3',
-      icon: 'cone.png'
-    },
-    {
-      name: 'weapon4',
-      icon: 'pir.png'
+  const server = new WebSocket.Server({ port: port });
+  let weapons = [];
+
+  getWeapons((err, files) => {
+    if (err) console.error(err);
+    else if(files) {
+      weapons = files.map(fileNmae => {
+        return {
+          icon: `${fileNmae}`,
+          name: fileNmae.replace(/\.png/, '')
+        }
+      });
     }
-  ];
+  });
 
   server.on('connection', ws => {
     ws.on('message', message => {
@@ -35,5 +30,12 @@ exports.default = function (port = 3000) {
       });
     })
     ws.send(`weapons=${JSON.stringify(weapons)}`);
-  })
+  });
+
+  function getWeapons(callback = (err) => { console.error(err); }, dirPath = './public/icons/') {
+    fs.readdir(dirPath, (err, files) => {
+      if (err) callback(err);
+      else callback(err, files);
+    })
+  }
 }

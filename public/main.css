@@ -15,6 +15,12 @@ body {
   flex-direction: column;
 }
 
+.center {
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -22,7 +28,8 @@ body {
   align-items: center;
   justify-content: center;
 }
-#wrapper[hidden]{
+
+#wrapper[hidden] {
   display: none;
 }
 
@@ -30,6 +37,16 @@ body {
   border: 1px solid black;
   overflow: hidden;
   display: flex;
+  background: #f0b7a1;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #f0b7a1 0%, #8c3310 50%, #752201 51%, #bf6e4e 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #f0b7a1 0%, #8c3310 50%, #752201 51%, #bf6e4e 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #f0b7a1 0%, #8c3310 50%, #752201 51%, #bf6e4e 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e', GradientType=0);
+  /* IE6-9 */
 }
 
 #roulette {
@@ -40,9 +57,9 @@ body {
   border: 5px solid red;
   position: absolute;
   top: 4px;
-  width: 130px;
-  height: 130px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 25px rgb(0, 0, 0);
 }
 
 #result {
@@ -61,6 +78,8 @@ body {
   flex: 1 0 100px;
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0px 0px 5px rgb(255, 238, 0));
 }
 
 .title {
